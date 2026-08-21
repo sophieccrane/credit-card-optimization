@@ -1,4 +1,5 @@
 from app.schemas.lookup import Lookup
+from app.schemas.credit_card import CreditCard
 
 class LookupService:
 
@@ -21,10 +22,10 @@ class LookupService:
 
     @staticmethod
     def get_credit_card_categories() -> list[dict]:
-        return [
-            {
-                "code": "AMEX_GLD",
-                "categories": [
+        credit_card_tuples = [
+            ("AMEX_GLD", CreditCard(
+                code="AMEX_GLD", 
+                categories=[
                     {
                         "code": "DINE",
                         "dealType": "POINTS",
@@ -62,10 +63,12 @@ class LookupService:
                         "amountType": "POINT"
                     }
                 ]
-            }, 
-            {
-                "code": "AMEX_PLTNM",
-                "categories": [
+            )
+        ), 
+        (
+            "AMEX_PLTNM", CreditCard(
+                code="AMEX_PLTNM",
+                categories=[
                     {
                         "code": "FLIGHT",
                         "dealType": "POINTS",
@@ -85,10 +88,12 @@ class LookupService:
                         "amountType": "POINT"
                     }
                 ]
-            }, 
-            {
-                "code": "CHASE_FRDM_UNLTD",
-                "categories": [
+            )
+        ),
+        (
+            "CHASE_FRDM_UNLTD", CreditCard(
+                code="CHASE_FRDM_UNLTD",
+                categories=[
                     {
                         "code": "TRAVEL_PORTAL",
                         "dealType": "CASHBACK",
@@ -114,8 +119,10 @@ class LookupService:
                         "amountType": "PERCENT"
                     }
                 ]
-            }
-        ]
+            )
+        )
+    ]
+        return dict(credit_card_tuples)
 
     @staticmethod
     def get_spending_categories() -> list[Lookup]:
